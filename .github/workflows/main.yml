@@ -2,7 +2,7 @@ name: Coin Alert
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Täglich um 8 Uhr UTC
+    - cron: '0 */6 * * *'  # Alle 6 Stunden
 
 jobs:
   run-news-bot:
