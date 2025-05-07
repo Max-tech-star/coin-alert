@@ -1,3 +1,14 @@
+import feedparser
+import requests
+import os
+import json
+
+RSS_URL = "https://cointelegraph.com/rss"
+KEYWORDS = ["solana"]
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
+SEEN_FILE = "seen_articles.json"
+
 import requests
 
 # 🔹 Bitcoin-Kurs abrufen
