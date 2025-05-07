@@ -1,0 +1,29 @@
+name: Market Alert Bot
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'  # Alle 4 Stunden
+  workflow_dispatch:
+
+jobs:
+  send_alert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v3
+
+      - name: Python einrichten
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Abhängigkeiten installieren
+        run: pip install requests
+
+      - name: Skript ausführen
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          NEWSDATA_API_KEY: ${{ secrets.NEWSDATA_API_KEY }}
+        run: python market_alert_bot.py
