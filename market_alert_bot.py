@@ -14,7 +14,7 @@ total_volume = data["total_volume"]["usd"]
 total_market_cap = data["total_market_cap"]["usd"]
 
 # SentiCrypt Sentiment Score
-sentiment_response = requests.get("https://senticrypt.com/api/sentiment").json()
+sentiment_response = requests.get("hhttps://api.senticrypt.com/v2/all.json").json()
 sentiment_score = sentiment_response.get("mean", "N/A")
 
 # Crypto News API (NewsData.io)
