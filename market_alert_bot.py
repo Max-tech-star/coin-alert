@@ -11,11 +11,7 @@ data = cg_response["data"]
 
 btc_dominance = data["market_cap_percentage"]["btc"]
 total_volume = data["total_volume"]["usd"]
-stablecoin_market_cap = data.get("stablecoin_market_cap", {}).get("usd", None)
-if stablecoin_market_cap is None:
-    print("Stablecoin market cap data is missing or malformed.")
 total_market_cap = data["total_market_cap"]["usd"]
-stablecoin_dominance = (stablecoin_market_cap / total_market_cap) * 100
 
 # SentiCrypt Sentiment Score
 sentiment_response = requests.get("https://senticrypt.com/api/sentiment").json()
@@ -32,7 +28,6 @@ message = (
     f"📊 *Krypto Marktübersicht*\n\n"
     f"🔸 *Bitcoin-Dominanz*: {btc_dominance:.2f}%\n"
     f"🔸 *24h Handelsvolumen*: ${total_volume:,.0f}\n"
-    f"🔸 *Stablecoin-Dominanz*: {stablecoin_dominance:.2f}%\n"
     f"🔸 *Sentiment-Score*: {sentiment_score}\n\n"
     f"📰 *Top Nachrichten:*\n"
 )
