@@ -14,8 +14,19 @@ total_volume = data["total_volume"]["usd"]
 total_market_cap = data["total_market_cap"]["usd"]
 
 # SentiCrypt Sentiment Score
-sentiment_response = requests.get("hhttps://api.senticrypt.com/v2/all.json").json()
-sentiment_score = sentiment_response.get("mean", "N/A")
+sentiment_response = requests.get("https://api.senticrypt.com/v2/history/YYYY-MM-DD.json")
+
+# Überprüfen, ob die Antwort gültig ist
+if sentiment_response.status_code == 200:
+    try:
+        sentiment_data = sentiment_response.json()  # Versuche, die Antwort als JSON zu laden
+        sentiment_score = sentiment_data.get("mean", "N/A")  # Hole den "mean"-Wert oder setze "N/A" falls nicht vorhanden
+    except requests.exceptions.JSONDecodeError:
+        print("Fehler beim Decodieren der JSON-Antwort")
+        sentiment_score = "N/A"
+else:
+    print(f"Fehler bei der API-Anfrage, Statuscode: {sentiment_response.status_code}")
+    sentiment_score = "N/A"
 
 # Crypto News API (NewsData.io)
 news_api_key = os.getenv("NEWSDATA_API_KEY")
