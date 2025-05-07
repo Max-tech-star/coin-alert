@@ -11,7 +11,9 @@ data = cg_response["data"]
 
 btc_dominance = data["market_cap_percentage"]["btc"]
 total_volume = data["total_volume"]["usd"]
-stablecoin_market_cap = data["stablecoin_market_cap"]["usd"]
+stablecoin_market_cap = data.get("stablecoin_market_cap", {}).get("usd", None)
+if stablecoin_market_cap is None:
+    print("Stablecoin market cap data is missing or malformed.")
 total_market_cap = data["total_market_cap"]["usd"]
 stablecoin_dominance = (stablecoin_market_cap / total_market_cap) * 100
 
