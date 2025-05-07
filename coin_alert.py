@@ -1,15 +1,9 @@
-import feedparser
 import requests
 import os
-import json
 
-RSS_URL = "https://cointelegraph.com/rss"
-KEYWORDS = ["solana"]
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-CHAT_ID = os.getenv("CHAT_ID")
-SEEN_FILE = "seen_articles.json"
-
-import requests
+# 🔹 API-Zugangsdaten aus Umgebungsvariablen
+bot_token = os.getenv("BOT_TOKEN")
+chat_id = os.getenv("CHAT_ID")
 
 # 🔹 Bitcoin-Kurs abrufen
 btc_data = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=eur").json()
@@ -35,8 +29,6 @@ else:
     message += "🤔 Neutrale Stimmung – keine klare Richtung."
 
 # 🔹 Telegram senden
-bot_token = "7700165022:AAEMkWnOXmeR-rShtqhEEL8wE8Jcp8PRtzw"
-chat_id = "7772667744"
 send_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 requests.post(send_url, data={"chat_id": chat_id, "text": message})
 
